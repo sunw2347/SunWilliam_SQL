@@ -34,11 +34,11 @@ public class MainActivity extends AppCompatActivity {
         int isInserted = myDb.insertData(editName.getText().toString(), editAddress.getText().toString(), editPhone.getText().toString());
         if(isInserted == 1){
             Log.d("MyContactApp", "MainActivity: contact inserted");
-            Toast.makeText(MainActivity.this, "Success - contact inserted", Toast.LENGTH_LONG);
+            Toast.makeText(MainActivity.this, "Success - contact inserted", Toast.LENGTH_LONG).show();
         }
         else{
             Log.d("MyContactApp", "MainActivity: contact not inserted");
-            Toast.makeText(MainActivity.this, "Failed - contact not inserted", Toast.LENGTH_LONG);
+            Toast.makeText(MainActivity.this, "Failed - contact not inserted", Toast.LENGTH_LONG).show();
 
         }
     }
