@@ -2,6 +2,7 @@ package com.example.sunw2347.mycontactapp;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -55,4 +56,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return 1;
         }
     }
+
+    public Cursor getAllData(){
+        Log.d("MyContactApp","DatabaseHelper: pulling all records from db");
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery("select * from " + TABLE_NAME, null);
+        return res;
+
+    }
+
+
 }

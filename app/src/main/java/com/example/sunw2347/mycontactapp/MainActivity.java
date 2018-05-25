@@ -1,5 +1,7 @@
 package com.example.sunw2347.mycontactapp;
 
+import android.database.Cursor;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -41,6 +43,35 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(MainActivity.this, "Failed - contact not inserted", Toast.LENGTH_LONG).show();
 
         }
+    }
+
+    public void viewData(View view){
+        Cursor res = myDb.getAllData();
+        Log.d("MyContactApp", "MainActivity: viewData - received cursor " + res.getCount());
+
+        if(res.getCount() == 0){
+            Log.d("MyContactApp", "MainActivity: viewData - no data found");
+            showMessage("Error","No data found in database");
+            return;
+        }
+
+        StringBuffer buffer = new StringBuffer();
+        while(res.moveToNext()){
+            buffer.append(res.getString(0) + "\n"+  res.getString(1) + "\n" + res.getString(2) + "\n" + res.getString(3) + "\n\n");
+            //Append res column 0,1,2,3 to the buffer - see Stringbuffer and Cursor api's
+            //Delimit each of the "appends" with line feed "\n"
+        }
+
+        showMessage("Data", buffer.toString());
+    }
+
+    private void showMessage(String title, String message) {
+        Log.d("MyContactApp", "MainActivity: assembling AlertDialog");
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(true);
+        builder.setTitle(title);
+        builder.setMessage(message);
+        builder.show();
     }
 
 }
