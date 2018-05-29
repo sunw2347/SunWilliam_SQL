@@ -1,5 +1,6 @@
 package com.example.sunw2347.mycontactapp;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -57,12 +58,12 @@ public class MainActivity extends AppCompatActivity {
 
         StringBuffer buffer = new StringBuffer();
         while(res.moveToNext()){
-            buffer.append(res.getString(0) + "\n"+  res.getString(1) + "\n" + res.getString(2) + "\n" + res.getString(3) + "\n\n");
+            buffer.append("Item Number: " + res.getString(0) + "\n"+ "Name: " + res.getString(1) + "\n" +  "Address: " + res.getString(2) + "\n" +  "Phone Number: " + res.getString(3) + "\n\n");
             //Append res column 0,1,2,3 to the buffer - see Stringbuffer and Cursor api's
             //Delimit each of the "appends" with line feed "\n"
         }
 
-        showMessage("Data", buffer.toString());
+        showMessage("Contact List", buffer.toString());
     }
 
     private void showMessage(String title, String message) {
@@ -72,6 +73,15 @@ public class MainActivity extends AppCompatActivity {
         builder.setTitle(title);
         builder.setMessage(message);
         builder.show();
+    }
+
+    public static final String EXTRA_MESSAGE = "com.example.sunw2347.mycontactapp.MESSAGE";
+    public void searchRecord(View view){
+        Log.d("MyContactApp", "MainActivity: launching search");
+        Intent intent = new Intent(this, SearchActivity.class);
+        intent.putExtra(EXTRA_MESSAGE, editName.getText().toString());
+        startActivity(intent);
+
     }
 
 }
