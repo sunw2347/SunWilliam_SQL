@@ -35,8 +35,9 @@ public class SearchActivity extends AppCompatActivity {
         }
 
         StringBuffer buffer = new StringBuffer();
+        // *IN CASE OTHER SEARCH QUERIES ARE NEEDED* || res.getString(2).contains(message) || res.getString(3).contains(message)
         while(res.moveToNext()) {
-            if (res.getString(1).contains(message) || res.getString(2).contains(message) || res.getString(3).contains(message)) {
+            if (res.getString(1).contains(message) && message.length() > 0) {
                 buffer.append("Item Number: " + res.getString(0) + "\n" + "Name: " + res.getString(1) + "\n" + "Address: " + res.getString(2) + "\n" + "Phone Number: " + res.getString(3) + "\n\n");
             }
 
